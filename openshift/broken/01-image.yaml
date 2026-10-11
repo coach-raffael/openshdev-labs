@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broken01
+  labels: { app: broken01 }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: broken01 }
+  template:
+    metadata:
+      labels: { app: broken01 }
+    spec:
+      containers:
+      - name: shortly
+        image: quay.io/coach-raffael/shortly:3.O
+        ports:
+        - containerPort: 8080
+        env:
+        - name: APP_NAME
+          value: broken01
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef: { name: shortly-db-url, key: DATABASE_URL }

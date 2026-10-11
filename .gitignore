@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment files (shortly-v3/.env is part of the course and stays tracked)
+.env
+.env.*
+!shortly-v3/.env
+
+# Lab artefacts
+*.tar
+*.tgz
+backup.sql
+htpasswd
+registry/auth/

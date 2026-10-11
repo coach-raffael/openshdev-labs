@@ -1,0 +1,7 @@
+FROM registry.access.redhat.com/ubi9/ubi
+COPY . /app
+RUN dnf install -y python3.11 python3.11-pip
+RUN dnf clean all
+RUN pip3.11 install -r /app/requirements.txt
+RUN rm -rf /app/.git
+CMD python3.11 /app/app.py

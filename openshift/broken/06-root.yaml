@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broken06
+  labels: { app: broken06 }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: broken06 }
+  template:
+    metadata:
+      labels: { app: broken06 }
+    spec:
+      containers:
+      - name: web
+        image: docker.io/library/nginx:1.27
+        ports:
+        - containerPort: 80
