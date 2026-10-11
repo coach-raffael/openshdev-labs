@@ -1,4 +1,4 @@
-# 1. Base image — always fully qualified, always pinned
+# 1. Base image: always fully qualified, always pinned
 FROM registry.access.redhat.com/ubi9/ubi:9.5
 
 # 2. Metadata (OCI labels are queryable with podman inspect)
@@ -6,13 +6,13 @@ LABEL org.opencontainers.image.title="shortly" \
       org.opencontainers.image.version="3.0" \
       org.opencontainers.image.authors="student@example.com"
 
-# 3. Runtime dependencies of the OS level — one RUN, clean up in the same layer
+# 3. Runtime dependencies of the OS level: one RUN, clean up in the same layer
 RUN dnf install -y python3.11 python3.11-pip && dnf clean all
 
 # 4. Working directory: created if missing, used by every following instruction
 WORKDIR /opt/shortly
 
-# 5. Dependencies first, code last — cache-friendly order (see 4.5)
+# 5. Dependencies first, code last: cache-friendly order (see 4.5)
 COPY requirements.txt .
 RUN pip3.11 install --no-cache-dir -r requirements.txt
 
@@ -26,7 +26,7 @@ ENV PORT=8080 \
 # 8. Documentation of the listening port (does NOT publish it)
 EXPOSE 8080
 
-# 9. Permissions for a non-root user — and for OpenShift's arbitrary UIDs
+# 9. Permissions for a non-root user and for OpenShift's arbitrary UIDs
 RUN chgrp -R 0 /opt/shortly && chmod -R g=u /opt/shortly
 USER 1001
 

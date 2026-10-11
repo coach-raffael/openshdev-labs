@@ -21,7 +21,7 @@ def connect(retries=15, delay=2):
         try:
             return psycopg.connect(DATABASE_URL, autocommit=True, connect_timeout=3)
         except psycopg.OperationalError as e:
-            log.warning("database not ready (%s) — attempt %d/%d", e, attempt, retries)
+            log.warning("database not ready (%s), attempt %d/%d", e, attempt, retries)
             time.sleep(delay)
     log.error("database unreachable, giving up")
     sys.exit(1)

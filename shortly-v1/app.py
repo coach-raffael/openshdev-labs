@@ -8,7 +8,7 @@ BASE_URL = os.environ.get("BASE_URL", f"http://localhost:{PORT}")
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format="%(asctime)s %(levelname)s %(message)s")
 app = Flask(__name__)
-links, hits = {}, {}                      # in-memory "database" — on purpose
+links, hits = {}, {}                      # in-memory "database", on purpose
 
 def new_code(n=6):
     return "".join(random.choices(string.ascii_letters + string.digits, k=n))
